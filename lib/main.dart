@@ -1,9 +1,14 @@
+import 'package:provider/provider.dart';
+import 'package:to_do_app/provider/custom_provider.dart';
 import 'package:to_do_app/ui/index/index.dart';
 
 void main() {
-  runApp(MyApp());
   SystemChrome.setPreferredOrientations(
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
+  runApp(MultiProvider(
+    child: MyApp(),
+    providers: [ChangeNotifierProvider(create: (_) => MainProvider())],
+  ));
 }
 
 class MyApp extends StatelessWidget {
@@ -14,7 +19,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home:  CreateToDo(),
+      home: EnterScreen(),
     );
   }
 }

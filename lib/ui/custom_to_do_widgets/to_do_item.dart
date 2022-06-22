@@ -1,10 +1,24 @@
 import '../index/index.dart';
 
 class TODOItem extends StatefulWidget {
-  final String item_name;
-  final String date;
+  String? taskId;
+  int? status;
+  String? name;
+  int? type;
+  String? description;
+  String? finishDate;
+  int? urgent;
+  String? file;
 
-  TODOItem({this.item_name = "", this.date = ""});
+  TODOItem(
+      {this.taskId,
+      this.status,
+      this.name,
+      this.type,
+      this.description,
+      this.finishDate,
+      this.urgent,
+      this.file});
 
   @override
   State<TODOItem> createState() => _TODOItemState();
@@ -19,13 +33,17 @@ class _TODOItemState extends State<TODOItem> {
       padding: const EdgeInsets.only(left: 7, right: 7),
       width: Get.width * 0.80,
       height: Get.height * 0.08,
-      decoration: const BoxDecoration(
-          color: Color(0xFFDBDBDB),
-          borderRadius: BorderRadius.all(Radius.circular(14))),
+      decoration: BoxDecoration(
+          color: widget.urgent == 0
+              ? const Color(0xFFDBDBDB)
+              : const Color(0xFFFF8989),
+          borderRadius: const BorderRadius.all(Radius.circular(14))),
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          SvgPicture.asset("assets/icons/home.svg"),
+          widget.type == 1
+              ? SvgPicture.asset("assets/icons/home.svg")
+              : SvgPicture.asset("assets/icons/work.svg"),
           SizedBox(width: Get.width * 0.03),
           Expanded(
             child: Column(
@@ -33,7 +51,7 @@ class _TODOItemState extends State<TODOItem> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
                 CustomText(
-                  text: widget.item_name,
+                  text: widget.name!,
                   fontSize: 18,
                   fontWeight: FontWeight.w600,
                   color: const Color(0xFF383838),
@@ -42,7 +60,7 @@ class _TODOItemState extends State<TODOItem> {
                 SizedBox(width: Get.width * 0.03),
                 CustomText(
                   fontWeight: FontWeight.w600,
-                  text: widget.date,
+                  text: widget.finishDate!,
                   fontSize: 13,
                   color: const Color(0xFF383838),
                   textAlign: TextAlign.start,

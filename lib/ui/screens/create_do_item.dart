@@ -8,19 +8,15 @@ class CreateToDo extends StatefulWidget {
 }
 
 class _CreateToDoState extends State<CreateToDo> {
-  ButtonsEnum? buttonsEnum;
-  TerminationDate terminationDate = TerminationDate();
-  UrgentMarker urgentMarker = UrgentMarker();
-  int taskId = 0;
-  ToDoStatus toDoStatus = ToDoStatus();
-
+  TODOItem todoItem = TODOItem();
+  ToDoStatus  toDoStatus = ToDoStatus();
   @override
   Widget build(BuildContext context) {
     return CommonGradient(
       child: Column(
         children: <Widget>[
           SizedBox(height: Get.height * 0.07),
-         // Header(headerName: "Назва завдання..."),
+           Header(headerName: "Назва завдання..."),
           SizedBox(height: Get.height * 0.04),
           ToDoStatus(),
           SizedBox(
@@ -56,7 +52,7 @@ class _CreateToDoState extends State<CreateToDo> {
             label: "Cтворити",
             colorBackGround: const Color(0xFFFFD600),
             function: () {
-              String resultId = (taskId = taskId + 1) as String;
+              //  String resultId = (taskId = taskId + 1) as String;
               // DioService.saveToDo(
               //     taskId : resultId,
               //     status,

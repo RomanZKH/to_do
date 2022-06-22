@@ -4,9 +4,9 @@ class ResponseModel {
   String? name;
   int? type;
   String? description;
-  DateTime? finishDate;
+  String? finishDate;
   int? urgent;
-  DateTime? syncTime;
+  String? syncTime;
   String? file;
 
   ResponseModel(
@@ -23,12 +23,12 @@ class ResponseModel {
   factory ResponseModel.fromMap(Map<dynamic, dynamic> getData) {
     return ResponseModel(
       taskId: getData["taskId"],
-      status: getData["status"],
+      status: int.tryParse(getData["status"]),
       name: getData["name"],
-      type: getData["type"],
+      type: int.tryParse(getData["type"]),
       description: getData["description"],
       finishDate: getData["finishDate"],
-      urgent: getData["urgent"],
+      urgent: int.tryParse(getData["urgent"]),
       syncTime: getData["syncTime"],
       file: getData["file"],
     );

@@ -1,15 +1,8 @@
+import 'package:provider/provider.dart';
+import 'package:to_do_app/dio_model/get_model.dart';
+import 'package:to_do_app/provider/custom_provider.dart';
+
 import '../index/index.dart';
-
-List<TODOItem> allItems = [];
-
-List<TODOItem> jobRelatedItems = [
-  TODOItem(item_name: "what the flutter ?", date: "23/01/22"),
-  TODOItem(item_name: "what the flutter ?", date: "23/01/22")
-];
-
-List<TODOItem> personalItems = [
-  TODOItem(item_name: "what the flutter ?", date: "23/01/22")
-];
 
 class MainToDoListPage extends StatefulWidget {
   @override
@@ -22,8 +15,6 @@ class _MainToDoListPageState extends State<MainToDoListPage> {
   @override
   void initState() {
     super.initState();
-    allItems.addAll(jobRelatedItems);
-    allItems.addAll(personalItems);
   }
 
   @override
@@ -42,11 +33,8 @@ class _MainToDoListPageState extends State<MainToDoListPage> {
                         : null,
                     text: "Bci",
                     function: () {
-                      allItems.clear();
                       setState(() {
                         buttonsEnum = ButtonsEnum.all;
-                        allItems.addAll(jobRelatedItems);
-                        allItems.addAll(personalItems);
                       });
                     }),
                 ToDoButton(
@@ -55,10 +43,10 @@ class _MainToDoListPageState extends State<MainToDoListPage> {
                         : null,
                     text: "Робочi",
                     function: () {
-                      allItems.clear();
+                      //allItems.clear();
                       setState(() {
                         buttonsEnum = ButtonsEnum.workRelated;
-                        allItems.addAll(jobRelatedItems);
+                        //  allItems.addAll(jobRelatedItems);
                       });
                     }),
                 ToDoButton(
@@ -67,10 +55,9 @@ class _MainToDoListPageState extends State<MainToDoListPage> {
                         : null,
                     text: "Ocoбистi",
                     function: () {
-                      allItems.clear();
                       setState(() {
                         buttonsEnum = ButtonsEnum.personal;
-                        allItems.addAll(personalItems);
+                          
                       });
                     }),
               ],
@@ -82,9 +69,20 @@ class _MainToDoListPageState extends State<MainToDoListPage> {
               child: ListView.separated(
                 padding: const EdgeInsets.only(left: 18, right: 18, top: 20),
                 shrinkWrap: true,
-                itemCount: allItems.length,
+                itemCount: context.watch<MainProvider>().list.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return allItems[index];
+                  ResponseModel response =
+                      context.watch<MainProvider>().list[index];
+                  return TODOItem(
+                    taskId: response.taskId,
+                    status: response.status,
+                    name: response.name,
+                    finishDate: response.finishDate,
+                    description: response.description,
+                    file: response.file,
+                    type: response.type,
+                    urgent: response.urgent,
+                  );
                 },
                 separatorBuilder: (BuildContext context, int index) {
                   return SizedBox(height: Get.height * 0.02);

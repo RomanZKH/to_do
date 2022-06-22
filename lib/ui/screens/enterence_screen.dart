@@ -1,7 +1,12 @@
+import 'package:provider/provider.dart';
+import 'package:to_do_app/provider/custom_provider.dart';
+
 import '../../dio_service/dio_service.dart';
 import '../index/index.dart';
 
 class EnterScreen extends StatelessWidget {
+  DioService dioService = DioService();
+
   @override
   Widget build(BuildContext context) {
     return CommonGradient(
@@ -13,7 +18,7 @@ class EnterScreen extends StatelessWidget {
           labelSize: 22,
           label: "Bхiд",
           function: () {
-            DioService.getToDo();
+            context.read<MainProvider>().getToDoItem();
             Navigator.push(
               context,
               MaterialPageRoute(builder: (context) => MainToDoListPage()),
