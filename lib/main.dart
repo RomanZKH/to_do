@@ -1,5 +1,3 @@
-import 'package:provider/provider.dart';
-import 'package:to_do_app/provider/custom_provider.dart';
 import 'package:to_do_app/ui/index/index.dart';
 
 void main() {
@@ -7,7 +5,10 @@ void main() {
       [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown]);
   runApp(MultiProvider(
     child: MyApp(),
-    providers: [ChangeNotifierProvider(create: (_) => MainProvider())],
+    providers: [
+      ChangeNotifierProvider(create: (_) => MainProvider()),
+      ChangeNotifierProvider(create: (_) => CreateToDoProvider())
+    ],
   ));
 }
 
@@ -19,7 +20,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: EnterScreen(),
+      home:  CreateToDo(),
     );
   }
 }

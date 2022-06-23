@@ -2,7 +2,6 @@ import '../index/index.dart';
 import 'dart:io';
 
 class AddFile extends StatefulWidget {
-
   @override
   State<AddFile> createState() => _AddFileState();
 }
@@ -10,7 +9,7 @@ class AddFile extends StatefulWidget {
 class _AddFileState extends State<AddFile> {
   final _imagePicker = ImagePicker();
   bool _value = false;
-  File? image;
+  File? _image;
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +20,9 @@ class _AddFileState extends State<AddFile> {
         if (imgGallery != null) {
           setState(() {
             _value = true;
-            image = File(imgGallery.path);
+            _image = File(imgGallery.path);
+            context.read<CreateToDoProvider>().file =
+                _image.runtimeType.toString();
           });
         }
       },
@@ -39,13 +40,13 @@ class _AddFileState extends State<AddFile> {
                   text: _value ? "" : "Додати файл",
                   fontSize: 20,
                   color: const Color(0xFF383838)),
-              image == null
+              _image == null
                   ? Container(
                       height: Get.height * 0.1,
                       color: const Color(0xFFFBEFB4),
                     )
                   : Align(
-                      alignment: Alignment.topRight, child: Image.file(image!)),
+                      alignment: Alignment.topRight, child: Image.file(_image!)),
             ],
           )),
     );

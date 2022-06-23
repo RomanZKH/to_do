@@ -5,7 +5,7 @@ class CustomCheckBox extends StatelessWidget {
   Color? color;
 
 
-  CustomCheckBox({this.function, this.color});
+  CustomCheckBox({Key? key, this.function, this.color}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {

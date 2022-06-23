@@ -1,3 +1,5 @@
+import 'package:to_do_app/provider/create_to_do_provider.dart';
+
 import '../index/index.dart';
 
 class ToDoStatus extends StatefulWidget {
@@ -28,7 +30,7 @@ class _ToDoStatusState extends State<ToDoStatus> {
                   function: () {
                     setState(() {
                       buttonsEnum = ButtonsEnum.workRelated;
-                      type = 1;
+                      context.read<CreateToDoProvider>().type = 1;
                     });
                   },
                 ),
@@ -49,7 +51,7 @@ class _ToDoStatusState extends State<ToDoStatus> {
                   function: () {
                     setState(() {
                       buttonsEnum = ButtonsEnum.personal;
-                      type = 2;
+                      context.read<CreateToDoProvider>().type = 2;
                     });
                   },
                 ),
@@ -89,7 +91,7 @@ class _UrgentMarkerState extends State<UrgentMarker> {
             function: () {
               setState(() {
                 pressed = !pressed;
-                urgent = 1;
+                context.read<CreateToDoProvider>().urgent = 1;
               });
             },
           ),

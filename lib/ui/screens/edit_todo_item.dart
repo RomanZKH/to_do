@@ -13,7 +13,6 @@ class _EditToDoState extends State<EditToDo> {
         children: <Widget>[
           SizedBox(height: Get.height * 0.03),
           Header(
-            headerName: "Поicти",
             assetsSave: "assets/icons/check.svg",
             function: () {},
           ),
@@ -24,10 +23,8 @@ class _EditToDoState extends State<EditToDo> {
           ),
           AddDescription(
               textEditingController: description,
-              hint: description.text.isEmpty ? "Додати опис" : description.text,
-              contentPaddingLeft: 14,
-              contentPaddingRight: 14,
-              contentPaddingTop: 10),
+              hint:
+                  description.text.isEmpty ? "Додати опис" : description.text),
           SizedBox(
             height: Get.height * 0.042,
           ),

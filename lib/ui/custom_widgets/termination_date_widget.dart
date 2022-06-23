@@ -5,14 +5,11 @@ class TerminationDate extends StatefulWidget {
   bool _isPressed = false;
   String date = "";
 
-
-
   @override
   State<TerminationDate> createState() => _TerminationDateState();
 }
 
 class _TerminationDateState extends State<TerminationDate> {
-
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -25,8 +22,9 @@ class _TerminationDateState extends State<TerminationDate> {
                 lastDate: DateTime(2100))
             .then((value) {
           setState(() {
-          widget.date =  (widget._dateTime = value) as String;
-          });
+            widget.date = (widget._dateTime = value) as String ;
+            context.read<CreateToDoProvider>().finishDate = widget.date;
+           });
         });
       },
       child: Container(
@@ -55,4 +53,3 @@ class _TerminationDateState extends State<TerminationDate> {
     );
   }
 }
-

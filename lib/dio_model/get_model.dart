@@ -1,3 +1,5 @@
+import 'package:to_do_app/ui/index/index.dart';
+
 class ResponseModel {
   String? taskId;
   int? status;
@@ -32,5 +34,18 @@ class ResponseModel {
       syncTime: getData["syncTime"],
       file: getData["file"],
     );
+  }
+
+  ResponseModel copy() {
+    return ResponseModel(
+        status: this.status,
+        name: this.name,
+        description: this.description,
+        urgent: this.urgent,
+        file: this.file,
+        finishDate: this.finishDate,
+        taskId: this.taskId,
+        syncTime: this.syncTime,
+        type: this.type);
   }
 }

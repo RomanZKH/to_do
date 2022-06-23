@@ -1,7 +1,3 @@
-import 'package:provider/provider.dart';
-import 'package:to_do_app/dio_model/get_model.dart';
-import 'package:to_do_app/provider/custom_provider.dart';
-
 import '../index/index.dart';
 
 class MainToDoListPage extends StatefulWidget {
@@ -35,6 +31,7 @@ class _MainToDoListPageState extends State<MainToDoListPage> {
                     function: () {
                       setState(() {
                         buttonsEnum = ButtonsEnum.all;
+                        context.read<MainProvider>().sortToDoByType(-1);
                       });
                     }),
                 ToDoButton(
@@ -43,10 +40,9 @@ class _MainToDoListPageState extends State<MainToDoListPage> {
                         : null,
                     text: "Робочi",
                     function: () {
-                      //allItems.clear();
                       setState(() {
                         buttonsEnum = ButtonsEnum.workRelated;
-                        //  allItems.addAll(jobRelatedItems);
+                        context.read<MainProvider>().sortToDoByType(2);
                       });
                     }),
                 ToDoButton(
@@ -57,7 +53,7 @@ class _MainToDoListPageState extends State<MainToDoListPage> {
                     function: () {
                       setState(() {
                         buttonsEnum = ButtonsEnum.personal;
-                          
+                        context.read<MainProvider>().sortToDoByType(1);
                       });
                     }),
               ],
@@ -69,10 +65,10 @@ class _MainToDoListPageState extends State<MainToDoListPage> {
               child: ListView.separated(
                 padding: const EdgeInsets.only(left: 18, right: 18, top: 20),
                 shrinkWrap: true,
-                itemCount: context.watch<MainProvider>().list.length,
+                itemCount: context.watch<MainProvider>().sorted.length,
                 itemBuilder: (BuildContext context, int index) {
                   ResponseModel response =
-                      context.watch<MainProvider>().list[index];
+                      context.watch<MainProvider>().sorted[index];
                   return TODOItem(
                     taskId: response.taskId,
                     status: response.status,

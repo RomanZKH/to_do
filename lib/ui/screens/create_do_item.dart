@@ -1,5 +1,3 @@
-import 'package:to_do_app/dio_service/dio_service.dart';
-
 import '../index/index.dart';
 
 class CreateToDo extends StatefulWidget {
@@ -8,15 +6,13 @@ class CreateToDo extends StatefulWidget {
 }
 
 class _CreateToDoState extends State<CreateToDo> {
-  TODOItem todoItem = TODOItem();
-  ToDoStatus  toDoStatus = ToDoStatus();
   @override
   Widget build(BuildContext context) {
     return CommonGradient(
       child: Column(
         children: <Widget>[
           SizedBox(height: Get.height * 0.07),
-           Header(headerName: "Назва завдання..."),
+          Header(),
           SizedBox(height: Get.height * 0.04),
           ToDoStatus(),
           SizedBox(
@@ -24,10 +20,7 @@ class _CreateToDoState extends State<CreateToDo> {
           ),
           AddDescription(
               textEditingController: description,
-              hint: "Додати опис...",
-              contentPaddingLeft: 14,
-              contentPaddingRight: 14,
-              contentPaddingTop: 10),
+              hint: "Додати опис..."),
           SizedBox(
             height: Get.height * 0.042,
           ),
@@ -52,16 +45,7 @@ class _CreateToDoState extends State<CreateToDo> {
             label: "Cтворити",
             colorBackGround: const Color(0xFFFFD600),
             function: () {
-              //  String resultId = (taskId = taskId + 1) as String;
-              // DioService.saveToDo(
-              //     taskId : resultId,
-              //     status,
-              //     name,
-              //     type : toDoStatus.type,
-              //     description : description.text,
-              //     finishDat : terminationDate.date,
-              //     urgent : urgentMarker.urgent,
-              //     file)
+              context.read<CreateToDoProvider>().createNewTodo();
             },
           ),
         ],

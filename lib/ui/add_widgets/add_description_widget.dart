@@ -1,32 +1,35 @@
 import 'package:to_do_app/ui/index/index.dart';
 
-class AddDescription extends StatelessWidget {
+class AddDescription extends StatefulWidget {
   final String hint;
-  final double contentPaddingLeft;
-  final double contentPaddingTop;
-  final double contentPaddingRight;
   final TextEditingController? textEditingController;
 
   AddDescription({
     this.hint = "",
     this.textEditingController,
-    this.contentPaddingLeft = 0.0,
-    this.contentPaddingTop = 0,
-    this.contentPaddingRight = 0,
   });
 
   @override
+  State<AddDescription> createState() => _AddDescriptionState();
+}
+
+class _AddDescriptionState extends State<AddDescription> {
+  @override
   Widget build(BuildContext context) {
     return Container(
-      width: Get.width,
       height: Get.height * 0.10,
       color: const Color(0xFFFBEFB4),
       child: TextFormField(
-        maxLines: 5,
+        maxLines: 2,
         obscureText: false,
         expands: false,
         keyboardType: TextInputType.text,
         controller: description,
+        onTap: () {
+          setState(() {
+            context.read<CreateToDoProvider>().description = description.text;
+          });
+        },
         maxLength: 30,
         decoration: InputDecoration(
           counterText: "",
@@ -36,7 +39,7 @@ class AddDescription extends StatelessWidget {
           enabledBorder: OutlineInputBorder(
               borderRadius: BorderRadius.circular(0),
               borderSide: const BorderSide(width: 0, color: Color(0xFFFBEFB4))),
-          hintText: hint,
+          hintText: widget.hint,
           hintStyle: GoogleFonts.dmSerifDisplay(
             color: const Color(0xFF383838),
             fontSize: 19,
@@ -45,10 +48,10 @@ class AddDescription extends StatelessWidget {
           ),
           filled: true,
           fillColor: const Color(0xFFFBEFB4),
-          contentPadding: EdgeInsets.only(
-            left: contentPaddingLeft,
-            top: contentPaddingTop,
-            right: contentPaddingRight,
+          contentPadding: const EdgeInsets.only(
+            left: 14,
+            top: 10,
+            right: 14,
           ),
         ),
       ),

@@ -1,15 +1,28 @@
-import 'package:to_do_app/dio_service/dio_service.dart';
 import 'package:to_do_app/ui/index/index.dart';
-
-import '../dio_model/get_model.dart';
 
 class MainProvider with ChangeNotifier {
   DioService _dioService = DioService();
-  List<ResponseModel> list = [];
+  List<ResponseModel> toDoDataFromApi = [];
+  List<ResponseModel> sorted = [];
 
   void getToDoItem() async {
-    list = await _dioService.getToDo();
-    print(list.length);
+    toDoDataFromApi = await _dioService.getToDo();
+    toDoDataFromApi.forEach((element) {
+      sorted.add(element.copy());
+    });
+    notifyListeners();
+  }
+
+  void sortToDoByType(int type) {
+    if (type == -1) {
+      sorted.clear();
+      toDoDataFromApi.forEach((element) {
+        sorted.add(element.copy());
+      });
+    }else {
+      sorted =
+          toDoDataFromApi.where((element) => element.type == type).toList();
+    }
     notifyListeners();
   }
 }
